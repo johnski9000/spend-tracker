@@ -107,6 +107,7 @@ function ContributionForm() {
           });
           console.log(data);
         } catch (err) {
+          alert(err.response.data.error);
           console.log(err);
         }
       }
@@ -123,6 +124,7 @@ function ContributionForm() {
       const data = res.data;
       setData(data);
       console.log(data);
+
     } catch (err) {
       alert(
         `Unable to retrive data. API may need waking up, please contact Janusz Wozniak <Janusz.Wozniak@jdplc.com>: ${err}`
@@ -132,6 +134,7 @@ function ContributionForm() {
   }
   useEffect(() => {
     getReference();
+
   }, []);
 
   if (!data) {
@@ -172,24 +175,24 @@ function ContributionForm() {
             <div>
             <div className={styles.mainFormContainer} key={form.id}>
               <section className={styles.formContainer}>
-                <label htmlFor="spend_submitted_by">submittedBy</label>
+                <label htmlFor="spend_submitted_by">Submitted By</label>
                 <input id="spend_submitted_by"           
                 name="spend_submitted_by"
               label="spend_submitted_by"
               variant="filled"
-              placeholder="spend_submitted_by"
+              placeholder="Submitted By"
               value={form.spend_submitted_by}
               onChange={event => handleChangeInput(form.id, event)}
                   />
               </section>
 
               <section className={styles.formContainer}>
-                <label htmlFor="fascia">fascia</label>
+                <label htmlFor="fascia">Fascia</label>
 
                 <input
                   id="fascia"
                   name="fascia"
-                  placeholder="fascia"
+                  placeholder="Fascia"
                   value={form.fascia}
                   variant="filled"
                   onChange={event => handleChangeInput(form.id, event)}
@@ -197,7 +200,7 @@ function ContributionForm() {
               </section>
               
               <section className={styles.formContainer}>
-                <label htmlFor="brand">brand</label>
+                <label htmlFor="brand">Brand</label>
                 <select
                   id="brand"
                   name="brand"
@@ -206,7 +209,7 @@ function ContributionForm() {
                   onChange={event => handleChangeInput(form.id, event)}
 
                 >
-                                    <option>brand</option>
+                                    <option value="" disabled selected>Select Brand</option>
 
                   {data ? (
                     data[0].reference_list.map(function (item, i) {
@@ -218,7 +221,7 @@ function ContributionForm() {
                 </select>
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="department">department</label>
+                <label htmlFor="department">Department</label>
                 <select
                   id="department"
                   name="department"
@@ -226,7 +229,7 @@ function ContributionForm() {
                   required
                   onChange={event => handleChangeInput(form.id, event)}
                 >
-                                    <option>department</option>
+                                    <option value="" disabled selected>Select Department</option>
 
                   {data ? (
                     data[4].reference_list.map(function (item, i) {
@@ -239,19 +242,19 @@ function ContributionForm() {
               </section>
               <section className={styles.formContainer}>
                 <label htmlFor="spend_detail">
-                spend_detail
+                Spend Detail
                 </label>
 
                 <input
                   id="spend_detail"
                   name="spend_detail"
-                  placeholder="spend_detail"
+                  placeholder="Spend Detail"
                   value={form.spend_detail}
                   onChange={event => handleChangeInput(form.id, event)}
                 />
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="campaign_type">campaign_type</label>
+                <label htmlFor="campaign_type">Campaign Type</label>
                 <select
                   id="campaign_type"
                   name="campaign_type"
@@ -259,7 +262,7 @@ function ContributionForm() {
                   onChange={event => handleChangeInput(form.id, event)}
 
                 >
-                                    <option>campaign_type</option>
+                                    <option value="" disabled selected>Select Campaign Type</option>
 
                   {data ? (
                     data[1].reference_list.map(function (item, i) {
@@ -268,8 +271,76 @@ function ContributionForm() {
                   ) : (
                     <div>Loading...</div>
                   )}
+                  <option>Bottomline Profit</option>
                 </select>
               </section>
+              {
+                form.campaign_type === "Own Spend Budget" &&
+                <section className={styles.formContainer}>
+                <label htmlFor="own_spend_budget">
+                Own Spend Budget
+                </label>
+
+                <input
+                  id="own_spend_budget"
+                  name="own_spend_budget"
+                  placeholder="Own Spend Budget"
+                  // value={form.net_value}
+                  // onChange={event => handleChangeInput(form.id, event)}
+
+                />
+              </section>
+              }
+              {
+                form.campaign_type === "Brand Campaign Budget" && 
+                <section className={styles.formContainer}>
+                <label htmlFor="brand_campaign_budget">
+                Brand Campaign Budget
+                </label>
+
+                <input
+                  id="brand_campaign_budget"
+                  name="brand_campaign_budget"
+                  placeholder="Brand Campaign Budget"
+                  // value={form.net_value}
+                  // onChange={event => handleChangeInput(form.id, event)}
+
+                />
+              </section>
+              }
+              {
+                form.campaign_type === "Product Campaign Budget" &&
+                <section className={styles.formContainer}>
+                <label htmlFor="product_campaign_budget">
+                Product Campaign Budget
+                </label>
+
+                <input
+                  id="product_campaign_budget"
+                  name="product_campaign_budget"
+                  placeholder="Product Campaign Budget"
+                  // value={form.net_value}
+                  // onChange={event => handleChangeInput(form.id, event)}
+
+                />
+              </section>
+              }
+              {
+                form.campaign_type === "Bottomline Profit" &&
+                <section className={styles.formContainer}>
+                <label htmlFor="bottomline_profit">
+                  Bottomline Profit
+                </label>
+
+                <input
+                  id="bottomline_profit"
+                  name="bottomline_profit"
+                  placeholder="Bottomline Profit"
+                  // onChange={event => handleChangeInput(form.id, event)}
+
+                />
+              </section>
+              }
               <section className={styles.formContainer}>
                 <label htmlFor="net_value">
                   net_value

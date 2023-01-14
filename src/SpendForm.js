@@ -10,19 +10,20 @@ function SpendForm() {
   const [data, setData] = useState();
   const myRef = useRef(null);
   const [initialState, setInitialState] = useState([{
+    formType: "Spend Form",
     id: uuidv4(),
     year: "",
     week: "",
-    submittedBy: "",
+    spend_submitted_by: "",
     fascia: "",
     brand: "",
-    reference: "",
+    reference_number: "",
     department: "",
-    submittedPurchaseBy: "",
-    spendType: "",
-    spendDetail: "",
-    campaignType: "",
-    netValue: "",
+    submitted_purchase_by: "",
+    spend_type: "",
+    spend_detail: "",
+    campaign_type: "",
+    net_value: "",
   }])
   const [forms, setForms] = useState([
     {
@@ -30,16 +31,16 @@ function SpendForm() {
       id: uuidv4(),
       year: "",
       week: "",
-      submittedBy: "",
+      spend_submitted_by: "",
       fascia: data ? data[5].reference_list[1] : "",
       brand: "",
-      reference: "",
+      reference_number: "",
       department: "",
-      submittedPurchaseBy: "",
-      spendType: "",
-      spendDetail: "",
-      campaignType: "",
-      netValue: "",
+      submitted_purchase_by: "",
+      spend_type: "",
+      spend_detail: "",
+      campaign_type: "",
+      net_value: "",
     }
   ]);
   const addForms = () => {
@@ -50,16 +51,16 @@ function SpendForm() {
         id: uuidv4(),
         year: "",
         week: "",
-        submittedBy: "",
+        spend_submitted_by: "",
         fascia: "",
         brand: "",
-        reference: "",
+        reference_number: "",
         department: "",
-        submittedPurchaseBy: "",
-        spendType: "",
-        spendDetail: "",
-        campaignType: "",
-        netValue: "",
+        submitted_purchase_by: "",
+        spend_type: "",
+        spend_detail: "",
+        campaign_type: "",
+        net_value: "",
       },
     ]
     );
@@ -96,20 +97,21 @@ function SpendForm() {
             formType: info.formType,
             year: info.year,
             week: info.week,
-            submittedBy: info.submittedBy,
+            spend_submitted_by: info.spend_submitted_by,
             fascia: info.fascia,
             brand: info.brand,
-            reference: info.reference,
+            reference_number: info.reference_number,
             department: info.department,
-            submittedPurchaseBy: info.submittedPurchaseBy,
-            spendType: info.spendType,
-            spendDetail: info.spendDetail,
-            campaignType: info.campaignType,
-            netValue: info.netValue,
+            submitted_purchase_by: info.submitted_purchase_by,
+            spend_type: info.spend_type,
+            spend_detail: info.spend_detail,
+            campaign_type: info.campaign_type,
+            net_value: info.net_value,
           });
           console.log(data);
         } catch (err) {
-          console.log(err);
+          alert(err.response.data.error);
+          console.log(err)
         }
       }
       postingData(i)
@@ -196,13 +198,13 @@ function SpendForm() {
                 />
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="submittedBy">Spend Submitted By</label>
+                <label htmlFor="spend_submitted_by">Spend Submitted By</label>
 
                 <input
-                  id="submittedBy"
-                  name="submittedBy"
-                  placeholder="Submitted By"
-                  value={form.submittedBy}
+                  id="spend_submitted_by"
+                  name="spend_submitted_by"
+                  placeholder="Spend Submitted By"
+                  value={form.spend_submitted_by}
                   onChange={event => handleChangeInput(form.id, event)}
 
                 />
@@ -217,7 +219,7 @@ function SpendForm() {
                   onChange={event => handleChangeInput(form.id, event)}
 
                 >
-                                    <option>Fascia</option>
+                                  <option value="" disabled selected>Select Fascia</option> 
 
                   {data ? (
                     data[5].reference_list.map(function (item, i) {
@@ -237,7 +239,7 @@ function SpendForm() {
                   required
                   onChange={event => handleChangeInput(form.id, event)}
                 >
-                                    <option>Brand</option>
+                                    <option value="" disabled selected>Select Brand</option>
 
                   {data ? (
                     data[0].reference_list.map(function (item, i) {
@@ -249,15 +251,15 @@ function SpendForm() {
                 </select>
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="reference">
+                <label htmlFor="reference_number">
                   Purchase Order No. / Reference No.
                 </label>
 
                 <input
-                  id="reference"
-                  name="reference"
-                  placeholder="Reference"
-                  value={form.reference}
+                  id="reference_number"
+                  name="reference_number"
+                  placeholder="reference_number"
+                  value={form.reference_number}
                   onChange={event => handleChangeInput(form.id, event)}
                 />
               </section>
@@ -270,7 +272,7 @@ function SpendForm() {
                   onChange={event => handleChangeInput(form.id, event)}
 
                 >
-                                    <option>Depatment</option>
+                                    <option value="" disabled selected>Select Depatment</option>
 
                   {data ? (
                     data[4].reference_list.map(function (item, i) {
@@ -282,51 +284,51 @@ function SpendForm() {
                 </select>
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="submittedPurchaseBy">
+                <label htmlFor="submitted_purchase_by">
                   Purchase Order Submitted By
                 </label>
 
                 <input
-                  id="submittedPurchaseBy"
-                  name="submittedPurchaseBy"
+                  id="submitted_purchase_by"
+                  name="submitted_purchase_by"
                   placeholder="Purchase Submitted By"
-                  value={form.submittedPurchaseBy}
+                  value={form.submitted_purchase_by}
                   onChange={event => handleChangeInput(form.id, event)}
 
                 />
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="spendType">Spend Type</label>
+                <label htmlFor="spend_type">Spend Type</label>
 
                 <input
-                  id="spendType"
-                  name="spendType"
+                  id="spend_type"
+                  name="spend_type"
                   placeholder="Spend Type"
-                  value={form.spendType}
+                  value={form.spend_type}
                   onChange={event => handleChangeInput(form.id, event)}
                 />
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="spendDetail">Spend Detail</label>
+                <label htmlFor="spend_detail">Spend Detail</label>
 
                 <input
-                  id="spendDetail"
-                  name="spendDetail"
+                  id="spend_detail"
+                  name="spend_detail"
                   placeholder="Spend Detail"
-                  value={form.spendDetail}
+                  value={form.spend_detail}
                   onChange={event => handleChangeInput(form.id, event)}
                 />
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="campaignType">Campaign Type</label>
+                <label htmlFor="campaign_type">Campaign Type</label>
                 <select
-                  id="campaignType"
-                  name="campaignType"
-                  value={form.campaignType}
+                  id="campaign_type"
+                  name="campaign_type"
+                  value={form.campaign_type}
                   required
                   onChange={event => handleChangeInput(form.id, event)}
                 >
-                  <option>Campaign Type</option>
+                  <option value="" disabled selected>Select Campaign Type</option>
                   {data ? (
                     data[1].reference_list.map(function (item, i) {
                       return <option key={i}>{item}</option>;
@@ -337,13 +339,13 @@ function SpendForm() {
                 </select>
               </section>
               <section className={styles.formContainer}>
-                <label htmlFor="netValue">Net Value</label>
+                <label htmlFor="net_value">Net Value</label>
 
                 <input
-                  id="netValue"
-                  name="netValue"
+                  id="net_value"
+                  name="net_value"
                   placeholder="x,xxx.xx"
-                  value={form.netValue}
+                  value={form.net_value}
                   onChange={event => handleChangeInput(form.id, event)}
                 />
               </section>

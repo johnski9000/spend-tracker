@@ -6,15 +6,10 @@ import ContributionFormElement from "./components/ContributionFormElement.js"
 
 
 function SpendDetail() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [contribution, setContribution] = useState()
   const [filter, setFilter] = useState("Spend")
   const [searchId, setSearchId] = useState('');
-  // const [reference, setReference] = useState();
-  const handleChange = (event) => {
-    setSearchId(event.target.value);
-    console.log(searchId)
-  };
   async function getSpendForms() {
     try {
       const res = await axios.get("http://localhost:4000/");
@@ -41,17 +36,61 @@ function SpendDetail() {
   }
   
   useEffect(() => {
-    if (filter === "Spend") {
       getSpendForms();
-    } else if (filter === "Contribution") {
       getContributionForms();
+  }, []);
 
+const handleChange = (event) => {
+  setSearchId(event.target.value);
+};
+
+
+useEffect(() => {    
+    async function fetchData () {
+      if (searchId.length === 0 && filter === "Spend") {
+        getSpendForms();
+      } else if (searchId.length >= 1 && filter === "Spend") {
+        const params = {
+          reference_number: searchId
+        };
+        try {
+          const res = await axios.get('http://localhost:4000/getAll', {
+            params
+          });
+          const data = res.data
+          setData(data);
+          console.log(data)
+        } catch (error) {
+         alert(error) 
+        }
+      } 
+      // else if (searchId.length === 0 && filter === "Contribution") {
+      //   getContributionForms();
+
+      // } else if (searchId.length >= 1 && filter === "Contribution") {
+      //   const params = {
+      //     _id: searchId.toString()
+      //   };
+      //   try {
+      //     const res = await axios.get('http://localhost:4000/getAllContribution', {
+      //       params
+      //     });
+      //     const data2 = res.data
+      //     setContribution(data2);
+      //     console.log(data2)
+      //   } catch (error) {
+      //    alert(error) 
+      //   }
+      // }
     }
-  }, [filter]);
+    fetchData()
+    
+  
+}, [searchId])
+
+
 
  
-  
-
   if (!data) {
     return (
       <>
@@ -59,6 +98,8 @@ function SpendDetail() {
       </>
     );
   }
+
+ 
   if (!contribution) {
     return (
       <>
@@ -73,7 +114,7 @@ function SpendDetail() {
       <div className={styles.filterContainer}>
       <div className={styles.box_search}>
       <form name="search">
-        <input type="text" className={styles.input} name="txt" onmouseout="this.value = ''; this.blur();" value={searchId} onChange={handleChange} />
+        <input type="text" className={styles.input} name="txt" onMouseOut={"this.value = ''; this.blur();"} value={searchId} onChange={handleChange} />
         <i ></i>
     </form>
       </div>
@@ -96,16 +137,16 @@ function SpendDetail() {
                 id: post._id,
                       year: post.year,
                       week: post.week,
-                      submittedBy: post.submittedBy,
+                      spend_submitted_by: post.spend_submitted_by,
                       fascia: post.fascia,
                       brand: post.brand,
-                      reference: post.reference,
+                      reference_number: post.reference_number,
                       department: post.department,
-                      submittedPurchaseBy: post.submittedPurchaseBy,
-                      spendType: post.spendType,
-                      spendDetail: post.spendDetail,
-                      campaignType: post.campaignType,
-                      netValue: post.netValue,
+                      submitted_purchase_by: post.submitted_purchase_by,
+                      spend_type: post.spend_type,
+                      spend_detail: post.spend_detail,
+                      campaign_type: post.campaign_type,
+                      net_value: post.net_value,
               }}
               />
             }

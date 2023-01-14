@@ -45,16 +45,16 @@ function SpendFormElement({ post }) {
           id: info.id,
           year: info.year,
           week: info.week,
-          submittedBy: info.submittedBy,
+          spend_submitted_by: info.spend_submitted_by,
           fascia: info.fascia,
           brand: info.brand,
-          reference: info.reference,
+          reference_number: info.reference_number,
           department: info.department,
-          submittedPurchaseBy: info.submittedPurchaseBy,
-          spendType: info.spendType,
-          spendDetail: info.spendDetail,
-          campaignType: info.campaignType,
-          netValue: info.netValue,
+          submitted_purchase_by: info.submitted_purchase_by,
+          spend_type: info.spend_type,
+          spend_detail: info.spend_detail,
+          campaign_type: info.campaign_type,
+          net_value: info.netValue,
         }
       );
     } catch (err) {
@@ -118,13 +118,13 @@ function SpendFormElement({ post }) {
           />
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="submittedBy">Spend Submitted By</label>
+          <label htmlFor="spend_submitted_by">Spend Submitted By</label>
 
           <input
-            id="submittedBy"
-            name="submittedBy"
+            id="spend_submitted_by"
+            name="spend_submitted_by"
             placeholder="Submitted By"
-            value={data.submittedBy}
+            value={data.spend_submitted_by}
             onChange={(event) => handleChangeInputText(event)}
           />
         </section>
@@ -165,13 +165,13 @@ function SpendFormElement({ post }) {
           </select>
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="reference">Purchase Order No. / Reference No.</label>
+          <label htmlFor="reference_number">Purchase Order No. / Reference No.</label>
 
           <input
-            id="reference"
-            name="reference"
+            id="reference_number"
+            name="reference_number"
             placeholder="Reference"
-            value={data.reference}
+            value={data.reference_number}
             onChange={(event) => handleChangeInputNumber(event)}
           />
         </section>
@@ -193,46 +193,46 @@ function SpendFormElement({ post }) {
           </select>
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="submittedPurchaseBy">
+          <label htmlFor="submitted_purchase_by">
             Purchase Order Submitted By
           </label>
 
           <input
-            id="submittedPurchaseBy"
-            name="submittedPurchaseBy"
+            id="submitted_purchase_by"
+            name="submitted_purchase_by"
             placeholder="Purchase Submitted By"
-            value={data.submittedPurchaseBy}
+            value={data.submitted_purchase_by}
             onChange={(event) => handleChangeInputText(event)}
           />
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="spendType">Spend Type</label>
+          <label htmlFor="spend_type">Spend Type</label>
 
           <input
-            id="spendType"
-            name="spendType"
+            id="spend_type"
+            name="spend_type"
             placeholder="Spend Type"
-            value={data.spendType}
+            value={data.spend_type}
             onChange={(event) => handleChangeInputText(event)}
           />
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="spendDetail">Spend Detail</label>
+          <label htmlFor="spend_detail">Spend Detail</label>
 
           <input
-            id="spendDetail"
-            name="spendDetail"
+            id="spend_detail"
+            name="spend_detail"
             placeholder="Spend Detail"
-            value={data.spendDetail}
+            value={data.spend_detail}
             onChange={(event) => handleChangeInputText(event)}
           />
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="campaignType">Campaign Type</label>
+          <label htmlFor="campaign_type">Campaign Type</label>
           <select
-            id="campaignType"
-            name="campaignType"
-            value={data.campaignType}
+            id="campaign_type"
+            name="campaign_type"
+            value={data.campaign_type}
             onChange={(event) => handleChangeInput(event)}
             required
           >
@@ -246,13 +246,13 @@ function SpendFormElement({ post }) {
           </select>
         </section>
         <section className={styles.formContainer}>
-          <label htmlFor="netValue">Net Value</label>
+          <label htmlFor="net_value">Net Value</label>
 
           <input
-            id="netValue"
-            name="netValue"
+            id="net_value"
+            name="net_value"
             placeholder="x,xxx.xx"
-            value={data.netValue}
+            value={data.net_value}
             onChange={(event) => handleChangeInputNumber(event)}
           />
         </section>
